@@ -78,3 +78,28 @@
     <p class="lg:text-white text-gray-600 text-sm">Made by <a href="https://twitter.com/justalever" target="_blank" class="underline opacity-75 hover:opacity-100">@justalever</a></p>
   </div>
 </div>
+<!-- app/views/restaurants/index.html.erb -->
+<h1>Restaurants</h1>
+
+<ul>
+  <% @restaurants.each do |restaurant| %>
+    <li>
+      <%= link_to restaurant.name, restaurant %>
+    </li>
+  <% end %>
+</ul>
+# app/controllers/restaurants_controller.rb
+class RestaurantsController < ApplicationController
+  def index
+    @restaurants = Restaurant.all
+  end
+
+  def show
+    @restaurant = Restaurant.find(params[:id])
+    @menu_items = @restaurant.menu_items
+    @orders = @restaurant.orders
+  end
+
+  # ...
+end
+
